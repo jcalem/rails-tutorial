@@ -28,6 +28,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        @user.send_welcome
+        session[:user_id] = @user.id
         format.html { redirect_to home_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
